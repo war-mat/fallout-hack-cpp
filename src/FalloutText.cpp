@@ -118,3 +118,40 @@ const std::vector < std::string > & FalloutText::get_address_list(void)
 {
     return address_list_;
 }
+
+int FalloutText::screen_coords_to_string_index(
+        std::string side, int screen_y, int screen_x)
+{
+    int x_offset;
+    
+    if (side == "left")
+    {
+        x_offset = left_lower_;
+    }
+    else
+    {
+        x_offset = right_lower_;
+    }
+    
+    return (screen_y - row_start_) * line_width_ + screen_x - x_offset;
+}
+
+std::tuple < int, int > FalloutText::string_index_to_screen_coords(
+        std::string side, int index)
+{
+    int x_offset;
+    
+    if (side == "left")
+    {
+        x_offset = left_lower_;
+    }
+    else
+    {
+        x_offset = right_lower_;
+    }
+    
+    int out_y = (index / line_width_) + row_start_;
+    int out_x = (index % line_width_) + x_offset;
+    
+    return std::make_tuple(out_y, out_x);
+}

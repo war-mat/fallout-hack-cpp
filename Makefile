@@ -8,8 +8,8 @@ CCFLAGS := -std=c++11 -c
 
 all: $(TARGET)
 
-$(TARGET): $(BUILDDIR)/hack.o $(BUILDDIR)/game.o $(BUILDDIR)/text.o $(BUILDDIR)/words.o $(BUILDDIR)/display.o
-	$(CC) $(BUILDDIR)/hack.o $(BUILDDIR)/game.o $(BUILDDIR)/text.o $(BUILDDIR)/words.o $(BUILDDIR)/display.o -lncursesw -o $(TARGET)
+$(TARGET): $(BUILDDIR)/hack.o $(BUILDDIR)/game.o $(BUILDDIR)/text.o $(BUILDDIR)/words.o $(BUILDDIR)/display.o $(BUILDDIR)/cursor.o
+	$(CC) $(BUILDDIR)/hack.o $(BUILDDIR)/game.o $(BUILDDIR)/text.o $(BUILDDIR)/words.o $(BUILDDIR)/display.o $(BUILDDIR)/cursor.o -lncursesw -o $(TARGET)
 
 $(BUILDDIR)/hack.o: $(SRCDIR)/fallout_hack.cpp $(INCDIR)/FalloutGame.h
 	$(CC) $(CCFLAGS) -o $(BUILDDIR)/hack.o $(SRCDIR)/fallout_hack.cpp
@@ -25,6 +25,9 @@ $(BUILDDIR)/words.o: $(SRCDIR)/FalloutWords.cpp
 	
 $(BUILDDIR)/display.o: $(SRCDIR)/FalloutDisplay.cpp
 	$(CC) $(CCFLAGS) -o $(BUILDDIR)/display.o $(SRCDIR)/FalloutDisplay.cpp
+	
+$(BUILDDIR)/cursor.o: $(SRCDIR)/FalloutCursor.cpp
+	$(CC) $(CCFLAGS) -o $(BUILDDIR)/cursor.o $(SRCDIR)/FalloutCursor.cpp
 
 clean:
 	rm $(BUILDDIR)/*.o $(BINDIR)/fallout_hack

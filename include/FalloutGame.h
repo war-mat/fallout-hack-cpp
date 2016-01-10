@@ -15,6 +15,7 @@
 #include "FalloutText.h"
 #include "FalloutWords.h"
 #include "FalloutDisplay.h"
+#include "FalloutCursor.h"
 
 class FalloutGame
 {

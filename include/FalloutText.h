@@ -8,6 +8,7 @@
 #include <iomanip>
 #include <sstream>
 #include <unordered_set>
+#include <tuple>
 
 class FalloutText
 {
@@ -72,6 +73,10 @@ public:
     const std::string & get_top_text(std::string key);
     const std::string & get_left_right_text(std::string side);
     const std::vector < std::string > & get_address_list(void);
+    int screen_coords_to_string_index(
+            std::string side, int screen_y, int screen_x);
+    std::tuple < int, int > string_index_to_screen_coords(
+            std::string side, int index);
 };
 
 #endif

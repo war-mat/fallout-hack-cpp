@@ -112,7 +112,7 @@ void FalloutDisplay::print_attempts(int attempts)
     
     std::string out = std::to_string(attempts) + " ATTEMPT(S) LEFT: ";
     
-    // position needs to be adjustable
+    // position needs to be made adjustable
     move_print_string_char_dly(out, 1, 4, 25);
     
     for (int i = 0; i < (attempts * 2); i+= 2)
@@ -122,9 +122,3 @@ void FalloutDisplay::print_attempts(int attempts)
         refresh();
     }
 }
-
-        
-        
-        
-        
-        
