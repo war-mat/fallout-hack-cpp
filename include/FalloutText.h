@@ -68,6 +68,10 @@ public:
     int set_start_address(void);
     void gen_address_list(void);
     std::string int_address_to_hex_string(int address);
+    void gen_junk_strings(void);
+    const std::string & get_top_text(std::string key);
+    const std::string & get_left_right_text(std::string side);
+    const std::vector < std::string > & get_address_list(void);
 };
 
 #endif

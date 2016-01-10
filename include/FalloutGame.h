@@ -1,18 +1,25 @@
 #ifndef FALLOUT_GAME_H
 #define FALLOUT_GAME_H
 
+#define _XOPEN_SOURCE_EXTENDED
+
+#include <locale.h>
+#include <ncursesw/curses.h>
+#include <unistd.h>
+
+#include <cstdlib>
+#include <string>
+#include <map>
 #include <vector>
 #include <iostream>
-
 #include "FalloutText.h"
 #include "FalloutWords.h"
+#include "FalloutDisplay.h"
 
 class FalloutGame
 {
 private:
-    
-    
-    std::string password = "";
+    std::string password;
     
     std::vector < std::string > candidate_list;
     
@@ -46,9 +53,13 @@ private:
     //FalloutWords words_;
     FalloutWords words_ = FalloutWords("/usr/share/dict/words");
     
-    // initialize game text object    
+    // initialize game text object
     FalloutText text_ = FalloutText(row_start_, left_text_start_, 32, 
             line_width_, num_rows_);
+            
+    // initialize game text object
+    // i don't know if line_width_ and num_rows_ are even initialized at this point
+    FalloutDisplay display = FalloutDisplay(line_width_, num_rows_);
     
     //FalloutGame() { } // private default constructor
     
@@ -56,6 +67,7 @@ public:
     FalloutGame(int curr_level);
     void report_values(void);
     void set_game_word_params(void);
+    void test_run(void);
 };
 
 #endif

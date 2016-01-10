@@ -233,5 +233,6 @@ void FalloutWords::new_game(int word_length, int num_words, int max_match)
     // select a password
     new_password();
     
+    // generate distribution of letter matches
     new_match_distribution(num_words, max_match);
 }
