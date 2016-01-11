@@ -16,7 +16,8 @@ private:
     
     std::map <std::string, std::string> top_text = {
             {"logo", "ROBCO INDUSTRIES (TM) TERMLINK PROTOCOL"},
-            {"command", "ENTER PASSWORD NOW"}
+            {"command", "ENTER PASSWORD NOW"},
+            {"warning", "!!! WARNING: LOCKOUT IMMINENT !!!"}
             };
     
     // text up-down bounds (screen coords)        
@@ -47,7 +48,7 @@ private:
     std::string right_text_;
     
     // array for storing right side text strings
-    std::vector < std::string > right_text_list_;
+    std::vector < std::string > right_text_list_ = {};
     int right_max_lines_ = 20;
     int max_bracket_len_ = 20;
     
@@ -77,6 +78,7 @@ public:
             std::string side, int screen_y, int screen_x);
     std::tuple < int, int > string_index_to_screen_coords(
             std::string side, int index);
+    void reset_text_list(void);
 };
 
 #endif

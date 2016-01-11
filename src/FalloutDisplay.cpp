@@ -39,7 +39,7 @@ void FalloutDisplay::move_print_string_delay(
 Print string to screen with a delay after each character
 **/
 void FalloutDisplay::move_print_string_char_dly(
-    const std::string &str, int col, int row, unsigned int delay)
+        const std::string &str, int col, int row, unsigned int delay)
 {
     // convert microseconds to milliseconds
     delay *= 1000;
@@ -104,7 +104,7 @@ void FalloutDisplay::game_text_update(
     }
 }
 
-void FalloutDisplay::print_attempts(int attempts)
+void FalloutDisplay::print_attempts(int attempts, int delay_ms)
 {
     cchar_t block_char;
     
@@ -113,12 +113,12 @@ void FalloutDisplay::print_attempts(int attempts)
     std::string out = std::to_string(attempts) + " ATTEMPT(S) LEFT: ";
     
     // position needs to be made adjustable
-    move_print_string_char_dly(out, 1, 4, 25);
+    move_print_string_char_dly(out, 1, 4, delay_ms);
     
     for (int i = 0; i < (attempts * 2); i+= 2)
     {
         mvadd_wch(4, 20 + i, &block_char);
-        usleep(25000);
+        usleep((delay_ms * 1000));
         refresh();
     }
 }

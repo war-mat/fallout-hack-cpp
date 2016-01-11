@@ -44,13 +44,13 @@ int main()
     {
         open_curses();
         
-        FalloutGame game = FalloutGame(0);
-    
-        game.report_values();
+        FalloutGame game = FalloutGame();
         
-        game.test_run();
+        //game.test_run();
+        
+        game.new_game(1);
 
-        
+        game.play_game();
         
         int ch;
         

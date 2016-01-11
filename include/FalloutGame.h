@@ -25,7 +25,7 @@ private:
     std::vector < std::string > candidate_list;
     
     // index = level, (word_length, num_words, match_limit)
-    std::vector < std::vector<int> > levels = {
+    std::vector < std::vector<int> > levels_ = {
             {6, 15, 4},
             {6, 15, 3},
             {7, 15, 4},
@@ -36,6 +36,9 @@ private:
     
     // current level        
     int curr_level_;
+    
+    // attempts left
+    int attempts_;
     
     // word constants (based on difficulty)
     int word_length_;
@@ -51,24 +54,21 @@ private:
     int right_cursor_pos_ = 49;
     
     
-    //FalloutWords words_;
-    FalloutWords words_ = FalloutWords("/usr/share/dict/words");
+    FalloutWords words_;
     
-    // initialize game text object
-    FalloutText text_ = FalloutText(row_start_, left_text_start_, 32, 
-            line_width_, num_rows_);
-            
-    // initialize game text object
-    // i don't know if line_width_ and num_rows_ are even initialized at this point
-    FalloutDisplay display = FalloutDisplay(line_width_, num_rows_);
-    
-    //FalloutGame() { } // private default constructor
+    // game text object
+    FalloutText text_;
+
+    FalloutDisplay display_;
     
 public:
-    FalloutGame(int curr_level);
-    void report_values(void);
+    FalloutGame(void);
     void set_game_word_params(void);
-    void test_run(void);
+    //void test_run(void);
+    void new_game(int level);
+    std::string play_game(void);
+    void update_upper_text(void);
+    std::string take_turn(void);
 };
 
 #endif

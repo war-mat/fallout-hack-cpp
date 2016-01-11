@@ -34,7 +34,7 @@ public:
             int left_col, int right_col, int first_row, 
             const std::string &left_str,
             const std::string &right_str);
-    void print_attempts(int attempts);
+    void print_attempts(int attempts, int delay_ms);
 };
 
 #endif

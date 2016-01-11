@@ -27,6 +27,7 @@ FalloutText::FalloutText(int row_start, int left_col_start, int right_col_start,
     // generate a list of addresses starting from start address
     gen_address_list();
     
+    // all of this should be moved from the constructor to a "new_text" func
     gen_junk_strings();
 }
 
@@ -154,4 +155,9 @@ std::tuple < int, int > FalloutText::string_index_to_screen_coords(
     int out_x = (index % line_width_) + x_offset;
     
     return std::make_tuple(out_y, out_x);
+}
+
+void FalloutText::reset_text_list(void)
+{
+    right_text_list_.clear();
 }
