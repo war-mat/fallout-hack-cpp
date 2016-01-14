@@ -42,12 +42,12 @@ public:
     FalloutWords(std::string file_name);
     void open_words_file(void);
     void report_values(void);
-    void gen_word_list(int word_length);
+    void gen_word_list(unsigned int word_length);
     void new_password(void);
     bool is_ascii(std::string word);
-    void new_match_distribution(int num_of_nums, int max_match);
+    void new_match_distribution(unsigned int num_words, int max_match);
     int hamming_closeness(std::string word1, std::string word2);
-    void gen_candidate_words(int num_words);
+    void gen_candidate_words(unsigned int num_words);
     void new_game(int word_length, int num_words, int max_match);
 };
 

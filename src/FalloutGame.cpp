@@ -5,7 +5,12 @@ FalloutGame::FalloutGame(void)
     : words_(FalloutWords("/usr/share/dict/words")),
     text_(FalloutText(
             row_start_, left_text_start_, 32, line_width_, num_rows_)),
-    display_(FalloutDisplay(line_width_, num_rows_))
+    display_(FalloutDisplay(line_width_, num_rows_)),
+    // cursor variables are weird, need to reevaluate just how many are actually needed
+    cursor_(FalloutCursor(row_start_, left_text_start_, row_start_,
+            line_width_, num_rows_, left_text_start_, right_text_start_))
+    //int initial_y, int initial_x, int row_start, int line_width, 
+    //int num_rows, int left_text_start, int right_text_start)
 {
     //
 }
@@ -63,8 +68,56 @@ std::string FalloutGame::take_turn(void)
 {
     update_upper_text();
     
+    std::string result = "";
     
-    return "lose";
+    // check attempts remaining, fail if 0
+    if (attempts_ < 1)
+    {
+        result = "lose";
+    }
+    else
+    {
+        while (true)
+        {
+            std::vector < Character > highlighted;
+            
+            std::vector < Character > hl_list = text_.get_highlighted(
+                    cursor_.get_side(), cursor_.get_cursor_y(), 
+                    cursor_.get_cursor_x());
+                    
+            // get character or word under cursor
+            std::string selected_word = text_.get_selected_word();
+            
+            // highlight character or word under cursor
+            display_.highlight(hl_list, 1);
+            
+            // print selected word at right cursor position
+            display_.print_right(selected_word);
+            
+            int input_char = getch();
+
+            if (input_char == 'q')
+            {
+                result = "quit";
+                break;
+            }
+            else if (input_char == ' ')
+            {
+                // check is selected is a word, bracket set, or neither
+                break;
+            }
+            else
+            {
+                // handle input
+                cursor_.handle_arrow_keys(input_char);
+            }
+            
+            // revert highlight
+            display_.highlight(hl_list, 0);
+        }
+    }
+    
+    return result;
 }
 
 /*
@@ -94,6 +147,8 @@ std::string FalloutGame::take_turn(void)
             self.display.print_right(selected_word, 0, 0)
             
             char = self.screen.getch()
+            * 
+            * 
                 
             if char == ord('q'):
                 result = "quit"
@@ -177,8 +232,11 @@ std::string FalloutGame::play_game(void)
         */
         
         std::string result = take_turn();
-        
-        if (result == "lose")
+        if (result == "quit")
+        {
+            break;
+        }
+        else if (result == "lose")
         {
             break;
         }

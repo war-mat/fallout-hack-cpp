@@ -122,3 +122,33 @@ void FalloutDisplay::print_attempts(int attempts, int delay_ms)
         refresh();
     }
 }
+
+void FalloutDisplay::highlight(const std::vector < Character > & hl_list, int on)
+{
+    for (auto hl : hl_list)
+    {
+        if (on)
+        {
+            mvchgat(hl.get_y(), hl.get_x(), 1, A_REVERSE, 1, NULL);
+        }
+        else
+        {
+            mvchgat(hl.get_y(), hl.get_x(), 1, A_NORMAL, 1, NULL);
+        }
+    }
+    
+    refresh();
+}
+
+void FalloutDisplay::print_right(std::string right_str)
+{
+    // erase right 'cursor' line
+    std::string erase = std::string(right_text_len_, ' ');
+    
+    move_print_string_delay(erase, right_text_col_, right_cursor_row_, 0);
+    
+    // append '>' to beginning of string
+    right_str = '>' + right_str;
+    
+    move_print_string_delay(right_str, right_text_col_, right_cursor_row_, 0);
+}

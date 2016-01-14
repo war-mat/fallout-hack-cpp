@@ -51,7 +51,7 @@ void FalloutWords::report_values(void)
     std::cout << "password: " << password_ << std::endl;
 }
 
-void FalloutWords::gen_word_list(int word_length)
+void FalloutWords::gen_word_list(unsigned int word_length)
 {
     for(std::string word : all_words_)
 	{
@@ -82,7 +82,7 @@ bool FalloutWords::is_ascii(std::string word)
     return true;
 }
 
-void FalloutWords::new_match_distribution(int num_words, int max_match)
+void FalloutWords::new_match_distribution(unsigned int num_words, int max_match)
 {
     // number of choices and size of x axis
     double x = max_match + 1.0;
@@ -112,8 +112,6 @@ void FalloutWords::new_match_distribution(int num_words, int max_match)
     //double sum = 0; for (int i = 0; i < probs.size(); i++) sum += probs[i];
     //std::cout << "sum of probabilities: " << sum << std::endl;
     
-    int matches = 0;
-    
     while (match_distribution_.size() < num_words)
     {
         double roll = static_cast < double > (rand()) /
@@ -121,7 +119,7 @@ void FalloutWords::new_match_distribution(int num_words, int max_match)
                 
         double cumulative_prob = 0.0;
         
-        for (int i = 0; i < probs.size(); i++)
+        for (unsigned int i = 0; i < probs.size(); i++)
         {
             cumulative_prob += probs[i];
             
@@ -140,6 +138,8 @@ Basically the inverse of Hamming distance.
 **/
 int FalloutWords::hamming_closeness(std::string word1, std::string word2)
 {
+    int count = 0;
+    
     try
     {
         if (word1.length() != word2.length())
@@ -148,27 +148,25 @@ int FalloutWords::hamming_closeness(std::string word1, std::string word2)
         }
         else
         {
-            int count = 0;
-            
-            for (int i = 0; i < word1.length(); i++)
+            for (unsigned int i = 0; i < word1.length(); i++)
             {
                 count += (word1[i] == word2[i]);
             }
-            
-            return count;
         }
     }
     catch(const char* msg)
     {
         std::cerr << msg << std::endl;
     }
+    
+    return count;
 }
 
-void FalloutWords::gen_candidate_words(int num_words)
+void FalloutWords::gen_candidate_words(unsigned int num_words)
 {
     try
     {
-        for (int i = 0; i < num_words; i++)
+        for (unsigned int i = 0; i < num_words; i++)
         {
             int match = match_distribution_[i];
             

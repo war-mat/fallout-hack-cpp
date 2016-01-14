@@ -4,7 +4,7 @@ INCDIR := include
 BUILDDIR := build
 BINDIR := bin
 TARGET := $(BINDIR)/fallout_hack
-CCFLAGS := -std=c++11 -c
+CCFLAGS := -Wall -std=c++11 -c
 
 all: $(TARGET)
 

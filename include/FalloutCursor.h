@@ -3,6 +3,7 @@
 
 #include <ncursesw/curses.h>
 
+#include <iostream>
 #include <string>
 
 class FalloutCursor
@@ -14,7 +15,6 @@ private:
     
     int row_start_;
     int row_end_;
-    int col_start_;
     
     int line_width_;
     int num_rows_;
@@ -29,14 +29,19 @@ private:
     
 public:
     FalloutCursor(
-            int initial_y, int initial_x, int row_start, int col_start,
-            int line_width, int num_rows, int left_col_start, 
-            int right_col_start);
+            int initial_y, int initial_x, int row_start, int line_width, 
+            int num_rows, int left_text_start, int right_text_start);
     void move_left(void);
     void move_right(void);
     void move_up(void);
     void move_down(void);
+    // more like set_side
     std::string get_side(void);
+    void set_side(void);
+    int get_cursor_y(void);
+    int get_cursor_x(void);
+    void handle_arrow_keys(int key);
+    void update_cursor_pos(void);
 };
 
 #endif

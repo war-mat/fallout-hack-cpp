@@ -7,6 +7,8 @@
 #include <string>
 #include <vector>
 
+#include "FalloutText.h"
+
 class FalloutDisplay
 {
 private:
@@ -16,7 +18,9 @@ private:
     // screen coords of right text box
     int right_text_row_ = 20;
     int right_text_col_ = 49;
-        
+    
+    // 'cursor' position and max length of that line
+    int right_cursor_row_ = 22;    
     int right_text_len_ = 28;
     
 public:
@@ -35,6 +39,8 @@ public:
             const std::string &left_str,
             const std::string &right_str);
     void print_attempts(int attempts, int delay_ms);
+    void highlight(const std::vector < Character > & hl_list, int on);
+    void print_right(std::string right_str);
 };
 
 #endif

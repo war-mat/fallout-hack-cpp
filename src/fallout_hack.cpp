@@ -6,6 +6,8 @@ void close_curses(void)
 {
     nocbreak();
     curs_set(1);
+    echo();
+    keypad(stdscr, false);
     endwin();
 }
 
@@ -15,6 +17,8 @@ void open_curses(void)
         
     cbreak();
     curs_set(0);
+    keypad(stdscr, true);
+    noecho();
         
     start_color();
         
@@ -51,12 +55,6 @@ int main()
         game.new_game(1);
 
         game.play_game();
-        
-        int ch;
-        
-        ch = wgetch(stdscr);
-    
-
     }
     catch (...)
     {

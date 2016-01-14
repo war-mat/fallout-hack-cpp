@@ -50,7 +50,7 @@ private:
     int num_rows_ = 17;
     int row_start_ = 6;
     int left_text_start_ = 8;
-    int right_text_start_ = left_text_start_ + line_width_ + 8;
+    int right_text_start_ = left_text_start_ + line_width_ + 9;
     int right_cursor_pos_ = 49;
     
     
@@ -60,6 +60,8 @@ private:
     FalloutText text_;
 
     FalloutDisplay display_;
+    
+    FalloutCursor cursor_;
     
 public:
     FalloutGame(void);
